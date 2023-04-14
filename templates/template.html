@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>template</title>
+</head>
+<body>
+    <lable for="category">Category:</lable>
+    <select id="category" name="category">
+        <option value="">--category--</option>
+        {%for i in category%}
+        <option>{{i}}</option>
+        {%endfor%}
+    </select>
+
+    <lable for="product">product:</lable>
+    <select id="product" name="product">
+        <option value="">--product--</option>
+        {%for i in data%}
+        <option>{{i.name}}</option>
+        {%endfor%}
+    </select>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script>
+            a=document.getElementById("category");
+            a.addEventListener("change",fun)
+            function fun()
+            {
+                data=document.getElementById("category").value;
+                s={data}
+                $.ajax({
+                url:"/product",
+                type:"POST",
+                contentType: "application/json",
+                data: JSON.stringify(s)});
+            }
+    </script>
+</body>
+</html>
